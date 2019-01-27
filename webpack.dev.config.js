@@ -2,8 +2,7 @@ const path = require('path')
 const merge = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base.config.js')
 const webpack = require('webpack')
-
-module.exports = merge(baseWebpackConfig, {
+const devConfigJs = {
   mode: 'development',
   output: {
     filename: 'bound.js',
@@ -106,4 +105,6 @@ module.exports = merge(baseWebpackConfig, {
       aggregateTimeout: 300 // 默认值, 当你连续改动时候, webpack可以设置构建延迟时间(防抖)
     }
   }
-})
+}
+
+module.exports = merge(baseWebpackConfig, devConfigJs)

@@ -34,13 +34,15 @@
     "terser-webpack-plugin": "^1.2.1",
     "uglifyjs-webpack-plugin": "^2.1.1",
     "url-loader": "^1.1.2",
+    "webpack-bundle-analyzer": "^3.0.3",
     "webpack-cli": "^3.2.1",
     "webpack-dev-server": "^3.1.14",
     "webpack-merge": "^4.2.1"
   },
   "scripts": {
     "dev": "cross-env NODE_ENV=development npx webpack-dev-server --progress --config webpack.dev.config.js",
-    "build": "cross-env NODE_ENV=production npx webpack --progress --config webpack.prod.config.js"
+    "build": "cross-env NODE_ENV=production npx webpack --progress --config webpack.prod.config.js",
+    "build:report": "cross-env NODE_ENV=production npx webpack --progress --config webpack.analysis.config.js"
   },
   "keywords": [
     "webpack4",

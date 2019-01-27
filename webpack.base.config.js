@@ -4,6 +4,18 @@ const CleanWebpackplugin = require('clean-webpack-plugin')
 
 module.exports = {
   entry: './src/index.js',
+  resolve: {
+    // 模块扩展名
+    extensions: ['.js', '.vue', '.json'],
+    // 别名
+    alias: {
+      '@': path.resolve(__dirname, 'src/')
+    }
+  },
+  // 配置外部依赖不会打包到boudle
+  externals: {
+    jquery: 'jQuery'
+  },
   module: {
     rules: [
       // 编译js

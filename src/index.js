@@ -1,6 +1,7 @@
 import _ from 'lodash'
 import './style/reset.css'
 import './style/base.scss'
+import $ from 'jquery'
 
 function createDivElement () {
   const divElement = document.createElement('div')
@@ -26,3 +27,10 @@ class Person {
 
 const xm = new Person('xiaoming', 20)
 xm.say()
+
+// 测试外部扩展配置
+$(function () {
+  $('.logo').click(function () {
+    console.log('click')
+  })
+})
