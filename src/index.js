@@ -5,7 +5,7 @@ import $ from 'jquery'
 
 function createDivElement () {
   const divElement = document.createElement('div')
-  divElement.innerHTML = _.join(['kobe', 'cpul'], ' ')
+  divElement.innerHTML = _.join(['kobe', 'cpul'], '')
   return divElement
 }
 
