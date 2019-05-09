@@ -5,23 +5,30 @@ const CleanWebpackplugin = require('clean-webpack-plugin')
 module.exports = {
   entry: './src/index.js',
   resolve: {
-    // 模块扩展名
+    // 模块扩展名, 引入文件今可能写文件名
     extensions: ['.js', '.vue', '.json'],
-    // 别名
+    // 配置别名来映射路径
     alias: {
-      '@': path.resolve(__dirname, 'src/')
-    }
+      '@': path.resolve(__dirname, 'src/'),
+      // 对于固定的库, 减少递归解析
+      'vue': path.resolve(__dirname, 'node_modules/vue/dist/vue.min.js')
+    },
+    // 指明第三方模块的绝对路径, 减少路径查找
+    modules: [path.resolve(__dirname, 'node_modules')]
   },
   // 配置外部依赖不会打包到boudle
   externals: {
     jquery: 'jQuery'
   },
   module: {
+    // 忽略对没采用模块化的模块进行递归解析
+    noParse: [/vue\.min\.js/],
     rules: [
       // 编译js
       {
         test: /\.js$/,
         exclude: /(node_modules|bower_components)/,
+        include: path.resolve(__dirname, 'src'), // 缩小命中范围, 减少构建时间
         use: [
           {
             loader: 'babel-loader?cacheDirectory', // 通过cacheDirectory选项开启支持缓存
