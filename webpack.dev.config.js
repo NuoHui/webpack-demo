@@ -62,7 +62,7 @@ const devConfigJs = {
     publicPath: '/', // 此路径下的打包文件可在浏览器下访问
     compress: true, // 启用gzip压缩
     host: '0.0.0.0',
-    port: 9999,
+    port: 9991,
     open: true, // 自动打开浏览器
     overlay: { // 出现错误或者警告时候是否覆盖页面线上错误信息
       warnings: true,
