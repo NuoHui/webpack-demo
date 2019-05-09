@@ -1,6 +1,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackplugin = require('clean-webpack-plugin')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = {
   entry: './src/index.js',
@@ -31,10 +32,7 @@ module.exports = {
         include: path.resolve(__dirname, 'src'), // 缩小命中范围, 减少构建时间
         use: [
           {
-            loader: 'babel-loader?cacheDirectory', // 通过cacheDirectory选项开启支持缓存
-            options: {
-              presets: ['@babel/preset-env']
-            }
+            loader: 'babel-loader?cacheDirectory' // 通过cacheDirectory选项开启支持缓存
           },
           {
             loader: 'eslint-loader',
@@ -102,6 +100,19 @@ module.exports = {
         test: /\.(js|vue)$/,
         loader: 'eslint-loader',
         exclude: /node_modules/
+      },
+      {
+        test: /\.vue$/,
+        use: [
+          {
+            loader: 'vue-loader',
+            options: {
+              loaders: {
+                sass: ['style-loader', 'css-loader', 'sass-loader', 'postcss-loader']
+              }
+            }
+          }
+        ]
       }
     ]
   },
@@ -124,6 +135,7 @@ module.exports = {
       }
     }),
     // 清理dist目录
-    new CleanWebpackplugin(['dist'])
+    new CleanWebpackplugin(['dist']),
+    new VueLoaderPlugin()
   ]
 }

@@ -1,36 +1,16 @@
 import _ from 'lodash'
 import './style/reset.css'
 import './style/base.scss'
-import $ from 'jquery'
 
-function createDivElement () {
-  const divElement = document.createElement('div')
-  divElement.innerHTML = _.join(['kobe', 'cpul'], '')
-  return divElement
-}
+import Vue from 'vue'
+import App from './App.vue'
+import ElementUI from 'element-ui'
 
-const divEle = createDivElement()
-document.body.appendChild(divEle)
+Vue.use(ElementUI)
 
-console.log('测试开发环境调试模式22')
-// 测试babel编译
-
-class Person {
-  constructor (name, age) {
-    this.name = name
-    this.age = age
-  }
-  say () {
-    console.log(`my name is ${this.name}, and age is ${this.age}`)
-  }
-}
-
-const xm = new Person('xiaoming', 20)
-xm.say()
-
-// 测试外部扩展配置
-$(function () {
-  $('.logo').click(function () {
-    console.log('click')
-  })
+// eslint-disable-next-line
+new Vue({
+  el: '#app',
+  render: h => h(App)
 })
+window._ = _
