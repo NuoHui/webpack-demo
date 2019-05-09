@@ -117,6 +117,7 @@ module.exports = {
     ]
   },
   plugins: [
+    new CleanWebpackplugin(['dist']),
     // 打包模板
     new HtmlWebpackPlugin({
       inject: true,
@@ -134,8 +135,6 @@ module.exports = {
         removeStyleLinkTypeAttributes: true
       }
     }),
-    // 清理dist目录
-    new CleanWebpackplugin(['dist']),
     new VueLoaderPlugin()
   ]
 }

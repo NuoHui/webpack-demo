@@ -49,7 +49,7 @@ module.exports = merge(baseWebpackConfig, {
     // 提取CSS
     new MiniCssExtractPlugin({
       filename: devMode ? '[name].css' : '[name].[hash:5].css', // 设置输出的文件名
-      chunkFilename: devMode ? '[id].css': '[id].[hash:5].css'
+      chunkFilename: devMode ? '[id].css' : '[id].[hash:5].css'
     })
   ],
   optimization: {

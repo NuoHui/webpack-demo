@@ -2,6 +2,7 @@ const path = require('path')
 const merge = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base.config.js')
 const webpack = require('webpack')
+const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
 const devConfigJs = {
   mode: 'development',
   output: {
@@ -52,6 +53,22 @@ const devConfigJs = {
     ]
   },
   plugins: [
+    // 使用vendor-manifest.json引用dll
+    new webpack.DllReferencePlugin({
+      context: __dirname, // context：与Dllplugin里的context所指向的上下文保持一致，这里都是指向了根目录
+      manifest: require('./vendor-manifest.json')
+    }),
+    // 这个主要是将生成的vendor.dll.js文件加上hash值插入到页面中。
+    new AddAssetHtmlPlugin([{
+      // dll文件位置
+      filepath: path.resolve(__dirname, './static/js/vendor.dll.js'),
+      // dll最终输出的目录
+      outputPath: './js',
+      // dll 引用路径
+      publicPath: './js',
+      includeSourcemap: false,
+      hash: true
+    }]),
     new webpack.NamedModulesPlugin(), // 更方便查看patch的依赖
     new webpack.HotModuleReplacementPlugin() // HMR
   ],
